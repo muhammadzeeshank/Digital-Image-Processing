@@ -84,3 +84,57 @@ def applyFilter(img, img1, mask):
                     val += img[i + y][j + x] * mask[i][j]
             img1[y][x] = val
     return img1
+
+
+def medianFilter(img, img1, size):
+    """
+    : param img: the padded image
+    : param img1: the original image
+    : param size: size of mask
+    : return: image with median filter applied
+    """
+    rows, cols = img1.shape
+    for y in tqdm(range(rows)):
+        for x in range(cols):
+            data = []
+            for i in range(size):
+                for j in range(size):
+                    data.append(img[i+y][j+x])
+            img1[y][x] = np.median(data)
+    return img1
+
+
+def minFilter(img, img1, size):
+    """
+    : param img: the padded image
+    : param img1: the original image
+    : param size: size of mask
+    : return: image with min filter applied
+    """
+    rows, cols = img1.shape
+    for y in tqdm(range(rows)):
+        for x in range(cols):
+            data = []
+            for i in range(size):
+                for j in range(size):
+                    data.append(img[i+y][j+x])
+            img1[y][x] = np.min(data)
+    return img1
+
+
+def maxFilter(img, img1, size):
+    """
+    : param img: the padded image
+    : param img1: the original image
+    : param size: size of mask
+    : return: image with max filter applied
+    """
+    rows, cols = img1.shape
+    for y in tqdm(range(rows)):
+        for x in range(cols):
+            data = []
+            for i in range(size):
+                for j in range(size):
+                    data.append(img[i+y][j+x])
+            img1[y][x] = np.max(data)
+    return img1

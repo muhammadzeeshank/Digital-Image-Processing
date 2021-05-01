@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-from functions import constructMask, padImage, applyFilter
+from functions import constructMask, padImage, applyFilter, minFilter
 
 
 # **** main ***
@@ -11,10 +11,7 @@ imgtoread = folder + '/' + imagename
 orig_img = cv2.imread(imgtoread, 0)
 mask, mask_size = constructMask()
 pad_img = padImage(orig_img, mask_size)
-# # # to apply filter by your choice
-final_img = applyFilter(pad_img, orig_img, mask)
-# # # to apply median Filter
-# # final_img = medianFilter(pad_img, orig_img, mask_size)
+final_img = minFilter(pad_img, orig_img, mask_size)
 # # final image
 imagetodisplay = folder + '/' + 'result_' + imagename
 cv2.imwrite(imagetodisplay, final_img)
