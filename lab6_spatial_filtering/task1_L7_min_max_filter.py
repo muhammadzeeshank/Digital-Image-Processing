@@ -15,20 +15,39 @@ def constructMask():
             break
         else:
             print("[-] ERROR. Please Enter odd number!")
-    for i in range(size):
-        for j in range(size):
-            value = input(
-                f"Enter maske value(fraction/float/int) at ({i}, {j}):")
-            if '/' in value:
-                num, den = value.split('/')
-                value = float(num)/float(den)
-            else:
-                value = float(value)
-            mask[i][j] = value
-
-    # filling mask of (size, size) with value
-    mask = np.full([size, size], value)
+    mask = np.zeros([size, size])
+    while(True):
+        opt = input(
+            "Chose one option: \n 1) Mask with constant value \n 2) Mask with variable values \n")
+        if opt == '1':
+            value = input("Enter maske value(fraction/float/int):")
+            value = fractionToFloat(value)
+            # filling mask of (size, size) with value
+            mask = np.full([size, size], value)
+            break
+        elif opt == '2':
+            for i in range(size):
+                for j in range(size):
+                    value = input(
+                        f"Enter maske value(fraction/float/int) at ({i}, {j}):")
+                    mask[i][j] = fractionToFloat(value)
+            break
+        else:
+            print("[-] INVALID INPUT! Please chose 1 or 2")
     return mask, size
+
+
+def fractionToFloat(value):
+    '''
+    value: fraction e.g(a/b)
+    return: float value
+    '''
+    if '/' in value:
+        num, den = value.split('/')
+        value = float(num)/float(den)
+    else:
+        value = float(value)
+    return value
 
 
 def padImage(img1, size):
@@ -68,6 +87,7 @@ def applyFilter(img, img1, mask):
 # Reading image from drive
 orig_img = cv2.imread('images/img1b.tif', 0)
 mask, mask_size = constructMask()
+print(mask)
 # pad_img = padImage(orig_img, mask_size)
 # # # to apply filter by your choice
 # final_img = applyFilter(pad_img, orig_img, mask)
