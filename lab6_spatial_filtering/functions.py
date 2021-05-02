@@ -158,3 +158,12 @@ def sp_noise(image, prob):
             else:
                 output[i][j] = image[i][j]
     return output
+
+
+def combineImages(img1, img2):
+    rows, cols = img1.shape
+    img = np.zeros([rows, cols], np.float)
+    for y in tqdm(range(rows)):
+        for x in range(cols):
+            img[y][x] = img1[y][x] + img2[y][x]
+    return img
