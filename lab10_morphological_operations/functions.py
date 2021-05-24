@@ -16,12 +16,13 @@ def padImage(img1, size):
     return img
 
 
-def erosion(img1, mask):
+def erosion(img, mask):
     """
-    : param img1: the original image
+    : param img: the original image
     : param mask: structuring element
     : return: eroded image
     """
+    img1 = cv2.threshold(img, 127, 1, cv2.THRESH_BINARY)[1]
     size_mask = mask.shape[0]
     img = padImage(img1, size_mask)
     rows, cols = img1.shape
@@ -39,3 +40,28 @@ def erosion(img1, mask):
             else:
                 eroded_img[y][x] = 0
     return eroded_img
+
+
+def dilation(img, mask):
+    """
+    : param img: the binary image
+    : param mask: structuring element
+    : return: dilated image
+    """
+    img1 = cv2.threshold(img, 127, 1, cv2.THRESH_BINARY)[1]
+    size_mask = mask.shape[0]
+    img = padImage(img1, size_mask)
+    rows, cols = img1.shape
+    dilated_img = np.zeros([rows, cols])
+    size = mask.shape[0]
+    for y in range(rows):
+        for x in range(cols):
+            val = 0
+            for i in range(size):
+                for j in range(size):
+                    val += img[i + y][j + x] * mask[i][j]
+            if val > 0:
+                dilated_img[y][x] = 255
+            else:
+                dilated_img[y][x] = 0
+    return dilated_img
