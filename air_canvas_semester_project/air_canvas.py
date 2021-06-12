@@ -6,7 +6,7 @@ cv2.namedWindow('Color detectors')
 colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (0, 255, 255)]
 
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 # checking if camera is opened or not
 if cap.isOpened():
