@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 cv2.namedWindow('Color detectors')
+# project
 
 
 def nothing(x):
