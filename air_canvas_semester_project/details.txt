@@ -1,2 +1,0 @@
-cv2.inrange(src, lowerb, upperb)
-src is the input image. ‘lowerb’ and ‘upperb’ denotes the lower and upper boundary of the threshold region. A pixel is set to 255 if it lies within the boundaries specified otherwise set to 0. This way it returns the thresholded image.
